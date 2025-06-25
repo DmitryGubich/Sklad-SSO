@@ -1,0 +1,70 @@
+[project]
+name = "sklad-sso"
+version = "0.1.0"
+description = "SSO server for Sklad app"
+requires-python = ">=3.13"
+dependencies = [
+    "django>=5.2.3",
+    "django-environ>=0.12.0",
+    "djangorestframework>=3.16.0",
+    "djangorestframework-simplejwt>=5.5.0",
+    "psycopg2-binary>=2.9.10",
+]
+
+[tool.uv.workspace]
+members = ["sklad-sso"]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.2.0",
+    "pyre-check>=0.9.23",
+    "pytest>=8.4.1",
+    "pytest-django>=4.11.1",
+    "ruff>=0.12.0",
+]
+
+
+[tool.ruff.lint]
+select = [
+    "E", # pycodestyle errors
+    "W", # pycodestyle warnings
+    "F", # pyflakes
+    # "I",  # isort
+    "C", # flake8-comprehensions
+    "B", # flake8-bugbear
+]
+ignore = [
+    "E501", # line too long, handled by black
+    "B008", # do not perform function calls in argument defaults
+    "C901", # complexity
+    "E741", # ambiguous variable name
+    "B007", # unused loop variable
+    "C416", # unnecessary list comprehension
+]
+fixable = ["A", "B", "C", "D", "E", "F"]
+unfixable = []
+
+[tool.ruff]
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+line-length = 100
+target-version = "py313"
