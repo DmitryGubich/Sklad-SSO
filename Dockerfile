@@ -2,11 +2,9 @@ FROM ghcr.io/astral-sh/uv:python3.13-alpine
 
 # Install the project into `/src`
 WORKDIR /src
-
-# Enable bytecode compilation
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONPATH=.
 ENV UV_COMPILE_BYTECODE=1
-
-# Copy from the cache instead of linking since it's a mounted volume
 ENV UV_LINK_MODE=copy
 
 # Install the project's dependencies using the lockfile and settings
@@ -22,4 +20,5 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --locked --no-dev
 
 # Place executables in the environment at the front of the path
-ENV PATH="/src/.venv/bin:$PATH"
+RUN mv /src/.venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
