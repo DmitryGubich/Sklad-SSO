@@ -18,7 +18,7 @@ services:
   sso:
     restart: always
     build: .
-    command: 'gunicorn --bind 0.0.0.0:8000 app.wsgi'
+    command: 'gunicorn --workers 2 --threads 2 --bind 0.0.0.0:8000 --timeout 120 --preload app.wsgi'
     env_file:
       - ./.env
     volumes:

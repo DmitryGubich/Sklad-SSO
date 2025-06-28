@@ -19,3 +19,7 @@ migrate:
 .PHONY: superuser
 superuser:
 	docker compose exec sso python manage.py createsuperuser
+
+.PHONY: collectstatic
+collectstatic:
+	docker compose exec sso python manage.py collectstatic
