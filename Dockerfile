@@ -3,7 +3,7 @@ FROM ghcr.io/astral-sh/uv:python3.13-alpine
 # Install the project into `/src`
 WORKDIR /src
 ENV PYTHONUNBUFFERED=1
-ENV PYTHONPATH=.
+ENV PYTHONPATH=/src:/opt/venv/lib/python3.13/site-packages
 ENV UV_COMPILE_BYTECODE=1
 ENV UV_LINK_MODE=copy
 

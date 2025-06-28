@@ -142,4 +142,6 @@ LOGGING = {
     },
 }
 
-LOGIN_URL = '/admin/login/'
+LOGIN_URL = "/admin/login/"
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static")

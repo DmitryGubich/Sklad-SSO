@@ -9,17 +9,25 @@ services:
       - './init-schemas-db.sh:/docker-entrypoint-initdb.d/init-schemas-db.sh'
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 3s
+      timeout: 5s
+      retries: 5
 
   sso:
     restart: always
     build: .
-    command: 'python manage.py runserver 0.0.0.0:8000'
+    command: 'gunicorn --bind 0.0.0.0:8000 app.wsgi'
     env_file:
       - ./.env
     volumes:
       - '.:/src'
     ports:
       - '8000:8000'
+    depends_on:
+      postgres:
+        condition: service_healthy
 
 volumes:
   pgdata:
